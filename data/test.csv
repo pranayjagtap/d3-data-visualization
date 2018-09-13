@@ -1,0 +1,6 @@
+round,winner,results,year,gender,player1,player2,country1,country2,firstServe1,firstServe2,ace1,ace2,double1,double2,firstPointWon1,firstPointWon2,secPointWon1,secPointWon2,fastServe1,fastServe2,avgFirstServe1,avgFirstServe2,avgSecServe1,avgSecServe2,break1,break2,return1,return2,total1,total2,winner1,winner2,error1,error2,net1,net2
+Final,Rafael Nadal,7-5 3-6 7-6(3) 3-6 6-2,2009,m,Rafael Nadal,Roger Federer,ESP,SUI,64%,52%,4,11,4,6,66%,73%,48%,45%,196,204,179,183,143,156,44%,32%,40%,41%,173,174,50,71,41,64,58%,72%
+semi,Rafael Nadal,6-7(4) 6-4 7-6(2) 6-7(1) 6-4,2009,m,Rafael Nadal,Fernando Verdasco,ESP,ESP,74%,69%,12,20,3,4,72%,71%,62%,55%,200,220,182,188,143,158,20%,50%,34%,31%,193,192,52,95,25,76,70%,65%
+semi,Roger Federer,6-2 7-5 7-5,2009,m,Roger Federer,Andy Roddick,SUI,USA,66%,65%,16,8,0,2,83%,70%,58%,52%,208,224,188,206,156,172,31%,0%,36%,26%,105,85,51,38,15,18,63%,50%
+quarter,Rafael Nadal,6-2 7-5 7-5,2009,m,Rafael Nadal,Gilles Simon,ESP,FRA,67%,55%,5,4,2,4,73%,71%,58%,38%,203,203,183,182,140,135,58%,43%,44%,32%,105,83,29,42,24,41,87%,66%
+quarter,Fernando Verdasco,7-6(2) 3-6 6-3 6-2,2009,m,Fernando Verdasco,Jo-Wilfried Tsonga,ESP,FRA,78%,65%,7,9,3,3,69%,72%,59%,49%,216,216,174,185,154,150,100%,15%,36%,33%,129,114,36,46,29,40,70%,61%
