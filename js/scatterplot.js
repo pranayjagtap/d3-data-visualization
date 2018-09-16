@@ -106,7 +106,10 @@ function scatterplot() {
             .attr('fill',function (d,i) { return backcolor(0) })
             .on('click',function(d){
                 linegraph(d);
-                 barchart(d);
+                barchart(d);
+
+
+                window.scrollTo(0,document.getElementById("anchor").getBoundingClientRect().top+500 );
             })
             .on('mouseover', function () {
                 d3.select(this)
@@ -116,7 +119,8 @@ function scatterplot() {
                     .attr('stroke-width',3)
                     .enter()
                     .append("text")
-                    .text(function(d) {return 'Player 1:'+d.player1+'\nPlayer 2:'+d.player2+'\nwinner1:'+d.winner1+'\nwinner2:'+d.winner2;})
+                    .text(function(d) {return 'Player 1:'+d.player1+'\nPlayer 2:'+d.player2+'\nwinner1:'+d.winner1+'\nwinner2:'+d.winner2;});
+
 
             })
             .on('mouseout', function () {
@@ -160,6 +164,23 @@ function scatterplot() {
             .text('winner Points by Player 2')
 
 
+        /*  Added background grids to the Line graph.
+  * variables passed:w,h to tickSize;x,y to scale */
+        var yAxisGrid = d3.svg.axis().scale(yScale)
+            .ticks(20)
+            .tickSize(w, 0)
+            .tickFormat("")   //Setting text on axis to null
+            .orient("right");
+
+        var xAxisGrid = d3.svg.axis().scale(xScale)
+            .ticks(11)
+            .tickSize(-h, 0)
+            .tickFormat("")
+            .orient("top");
+
     });
+
+
+
 
 }
