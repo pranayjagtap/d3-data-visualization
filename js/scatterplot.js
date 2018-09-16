@@ -109,7 +109,7 @@ function scatterplot() {
                 barchart(d);
 
 
-                window.scrollTo(0,document.getElementById("anchor").getBoundingClientRect().top+500 );
+                //window.scrollTo(0,document.getElementById("anchor").getBoundingClientRect().top+500 );
             })
             .on('mouseover', function () {
                 d3.select(this)

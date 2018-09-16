@@ -1,43 +1,32 @@
 function barchart(d) {
 
-
+    var d = d;
     console.log(d);
     d3                                                                    //To clear previous rendering added on 09-Sep-2018
         .select("#vis_canvas3")
         .selectAll("*")
         .remove();
 
-
-    //Variables
     var margin = {top: 70, right: 50, bottom: 70, left: 50},
         width = 400,
         height = 400;
-    var mindate = new Date(2004),
-        maxdate = new Date(2014);
-    var d = d;
+
+
     var body = d3.select('#vis_canvas3')
     var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+    var color = d3.scale.category10();
     var y = d3.scale.linear().range([height, 0]);
-    var myData=200;
-    var myName;
-    var errorCount=0;
-    var myName2;
-    var errorCount2=0;
-    var myName3;
-    var errorCount3=0;
-    var myName4;
-    var errorCount4=0;
 
-    //Axes orientations
     var xAxis = d3.svg.axis()
         .scale(x)
         .orient("bottom")
+
+
     var yAxis = d3.svg.axis()
         .scale(y)
         .orient("left")
         .ticks(10);
 
-    //Main svg body
     var svg = body.append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
@@ -45,78 +34,19 @@ function barchart(d) {
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
+    d3.csv("./data/10yearAUSOpenMatches.csv", function (error, data) {
 
-    //Mother for loop for fetching data
-    d3.csv("./data/10yearAUSOpenMatches.csv", function (error, csv_data) {
-
-        //Created nested data structure--> Key=Player->(Inner key->Year: Value->error points)
-        var data2 = d3.nest(d)
-            .key(function(d) { return d.player1;})
-            .key(function(d){return d.year})
-            .rollup(function(d) {
-                return d3.sum(d, function(g) {return g.error1; });  //Taking sum of all the points for a particular year(key)
-            }).entries(csv_data);
-        data2.forEach(function(data2) {
-            data2.player1 = data2.key;
-            data2.error1 = data2.values;
-            data2.year=+data2.year;
+        data.forEach(function (d) {
+            d.year = +d.year;
+            d.error2 = +d.error2;
         });
 
-        //Repeated above for player 2
-        var data3 = d3.nest(d)
-            .key(function(d) { return d.player2;})
-            .key(function(d){return d.year})
-            .rollup(function(d) {
-                return d3.sum(d, function(g) {return g.error2; });
-            }).entries(csv_data);
-        data3.forEach(function(data3) {
-            data3.player2 = data3.key;
-            data3.error2 = data3.values;
-            data3.year=+data3.year;
-        });
-
-
-        //First nested for loops fetch all the rows where player1 and player2 won ie were player1
-
-        for(var i=0;i<data2.length;i++)                              //For loop added on 10-sep-2018 for nested retrieving data for player 1
-            for(var j=0;j<data2[i].error1.length;j++) {
-
-                if(data2[i].player1===d.player1){                    //If cond added on 11-Sep-2018 to Compare player name as key to aggregate that player's stats
-                    myName=data2[i].player1;
-
-                    errorCount=data2[i].error1;
-
-                }else if(data2[i].player1===d.player2){             //to get player 2 data whenever he played as player1
-                    myName2=data2[i].player1;
-
-                    errorCount2=data2[i].error1;
-                }
-            }
-
-        //Second nested for loops fetch all the rows where player1 and player2 lost ie were player2
-        for(var i=0;i<data3.length;i++)                              //For loop  added on 10-sep-2018 for nested retrieving data for player2
-            for(var j=0;j<data3[i].error2.length;j++) {
-
-                if(data3[i].player2===d.player2){                    //If cond added on 11-Sep-2018 to Compare player name as key to aggregate that player's stats
-                    myName3=data3[i].player2;
-
-                    errorCount3=data3[i].error2;
-
-                }else if(data3[i].player2===d.player1){
-                    myName4=data3[i].player2;
-
-                    errorCount4=data3[i].error2;
-                }
-
-            }
-
-
-        //Set hardcoded minmax for domain
-        x.domain([mindate,maxdate] );
-        y.domain([0, 1000]);
-
-
-        //Set x-y axes and append to svg
+        x.domain(data.map(function (d) {
+            return d.year;
+        }));
+        y.domain([0, d3.max(data, function (d) {
+            return d.error2;
+        })]);
         svg.append('g')
             .attr('class','axis')
             .attr('transform', 'translate(0,' + height + ')')
@@ -140,25 +70,36 @@ function barchart(d) {
             .style("text-anchor", "end")
             .text("ERRORS");
 
-
-
-        //Plot bars of bar chart
         svg.selectAll(".bar")
-            .data(errorCount)
+            .data(data)
             .enter().append("rect")
-            .attr("class", "bar")
+            .on("mouseover", function(d) {
+                d3.select(this).style("fill", d3.rgb(color(d.rate)).darker(2));
+                d3.select(this)
+                    .attr('stroke-width',3)
+                    .enter()
+                    .append('title')
+                    .text(function (d) { return 'Player Name :'+d.player2+'\nTotal Errors:'+d.error2;})
+            })
+            .on("mouseout", function(d) {
+                d3.select(this).style("fill", color(d.rate));
+            })
+    .attr("class", "bar")
             .style("fill", "steelblue")
-            .attr("x", function (errorCount) {
-                return x(errorCount[1].key);
+            .attr("x", function (d) {
+                return x(d.year);
             })
             .attr("width", x.rangeBand())
-            .attr("y", function (errorCount) {
-                return y(errorCount.values);
+            .attr("y", function (d) {
+                return y(d.error1);
             })
-            .attr("height", function (errorCount) {
-                return height - y(errorCount.values);
-            });
-        console.log(errorCount);
+            .attr("height", function (d) {
+                return height - y(d.error1);
+            })
+            .append('title')
+            .text(function (totalCount) { return 'Player Name :'+myName+'\nType:Games Won'+'\nTotal Points:'+totalCount.values+'\nYear:'+totalCount.key;})
+
+        ;
 
     });
 
