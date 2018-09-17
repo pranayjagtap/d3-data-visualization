@@ -16,7 +16,7 @@ function barchart(d) {
     var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
     var color = d3.scale.category10();
     var y = d3.scale.linear().range([height, 0]);
-
+var data3=0;
     var xAxis = d3.svg.axis()
         .scale(x)
         .orient("bottom")
@@ -40,12 +40,26 @@ function barchart(d) {
             d.year = +d.year;
             d.error2 = +d.error2;
         });
+        //Repeated above for player 2
+        var data3 = d3.nest(d)
+            .key(function(d) { return d.year;})
 
-        x.domain(data.map(function (d) {
-            return d.year;
+            .rollup(function(d) {
+                return d3.sum(d, function(g) {return g.error2; });
+            }).entries(data);
+        data3.forEach(function(data3) {
+            data3.year = +data3.key;
+            data3.error2 = data3.values;
+
+        });
+console.log(data3[1].values)
+            console.log(data3)
+
+        x.domain(data3.map(function (data3) {
+            return data3.key;
         }));
-        y.domain([0, d3.max(data, function (d) {
-            return d.error2;
+        y.domain([0, d3.max(data3, function (data3) {
+            return data3.values;
         })]);
         svg.append('g')
             .attr('class','axis')
@@ -71,36 +85,36 @@ function barchart(d) {
             .text("ERRORS");
 
         svg.selectAll(".bar")
-            .data(data)
+            .data(data3)
             .enter().append("rect")
-            .on("mouseover", function(d) {
+            .on("mouseover", function(data3) {
                 d3.select(this).style("fill", d3.rgb(color(d.rate)).darker(2));
                 d3.select(this)
                     .attr('stroke-width',3)
                     .enter()
                     .append('title')
-                    .text(function (d) { return 'Player Name :'+d.player2+'\nTotal Errors:'+d.error2;})
+                    .text(function (data3) { return 'Player Name :'+data3.key+'\nerror Errors:'+data3.values;})
             })
             .on("mouseout", function(d) {
                 d3.select(this).style("fill", color(d.rate));
             })
-    .attr("class", "bar")
+            .attr("class", "bar")
             .style("fill", "steelblue")
-            .attr("x", function (d) {
-                return x(d.year);
+            .attr("x", function (data3) {
+                return x(data3.key);
             })
             .attr("width", x.rangeBand())
-            .attr("y", function (d) {
-                return y(d.error1);
+            .attr("y", function (data3) {
+                return y(data3.values);
             })
-            .attr("height", function (d) {
-                return height - y(d.error1);
+            .attr("height", function (data3) {
+                return height - y(data3.values);
             })
             .append('title')
-            .text(function (totalCount) { return 'Player Name :'+myName+'\nType:Games Won'+'\nTotal Points:'+totalCount.values+'\nYear:'+totalCount.key;})
+            .text(function (data3) { return 'Year'+data3.key+'\nGrand total error Points:'+data3.values;})
 
         ;
-
+        console.log(data3)
     });
 
 }
