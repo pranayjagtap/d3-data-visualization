@@ -68,19 +68,20 @@ console.log(data3[1].values)
             .call(xAxis)
             .append('text') // X-axis Label
             .attr('class','label')
-            .attr('y',-10)
-            .attr('x',width)
+            .attr('y',30)
+            .attr('x',width+10)
             .attr('dx','.50em')
             .style('text-anchor','end')
             .text('Years')
 
         svg.append("g")
             .attr("class", "y axis")
+            .style({ 'stroke': 'black', 'fill': 'none', 'stroke-width': '1px','font-size':'10px'})
             .call(yAxis)
             .append("text")
             .attr("transform", "rotate(-90)")
             .attr("y", 6)
-            .attr("dy", ".71em")
+            .attr("dy", ".50em")
             .style("text-anchor", "end")
             .text("ERRORS");
 

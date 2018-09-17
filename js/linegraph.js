@@ -398,13 +398,13 @@ function linegraph(d){
      * variables passed:w,h to tickSize;x,y to scale */
 
         var yAxisGrid = d3.svg.axis().scale(y)
-            .ticks(21)
+            .ticks(20)
             .tickSize(w, 0)
             .tickFormat("")   //Setting text on axis to null
             .orient("right");
 
         var xAxisGrid = d3.svg.axis().scale(x)
-            .ticks(11)
+            .ticks(10)
             .tickSize(-h, 0)
             .tickFormat("")
             .orient("top");
@@ -435,75 +435,6 @@ function linegraph(d){
                     .classed('axis', true)
                     .call(xAxisGrid);
 
- /*               //Lasso Module begins
-
-                var lasso_start = function() {
-                    lasso.items()
-                        .attr("r",10) // reset size
-                        .style("fill",null) // clear all of the fills
-                        .classed({"not_possible":true,"selected":false}); // style as not possible
-                };
-
-                var lasso_draw = function() {
-                    // Style the possible dots
-                    lasso.items().filter(function(d) {return d.possible===true})
-                        .classed({"not_possible":false,"possible":true});
-
-                    // Style the not possible dot
-                    lasso.items().filter(function(d) {return d.possible===false})
-                        .classed({"not_possible":true,"possible":false});
-                };
-
-                var lasso_end = function() {
-                    // Reset the color of all dots
-                    lasso.items()
-                        .style("fill", function(d) { return color(0); })
-                        .append('title')
-                        .text("selected")
-                    ;
-
-                    // Style the selected dots
-                    lasso.items().filter(function(d) {return d.selected===true})
-                        .classed({"not_possible":false,"possible":false})
-                        .attr("r",10)
-                    ;
-
-                    // Reset the style of the not selected dots
-                    lasso.items().filter(function(d) {return d.selected===false})
-                        .classed({"not_possible":true,"possible":false})
-
-
-                        .attr("r",5)
-                        .style("fill", function(d) { return d3.color('#000000') })
-                        .style('opacity',0.4);
-
-                };
-
-
-        // Create the area where the lasso event can be triggered
-                var lasso_area = svg.append("rect")
-                    .attr("width",w)
-                    .attr("height",h)
-                    .style("opacity",0);
-
-        // Define the lasso
-                var lasso = d3.lasso()
-                    .closePathDistance(75) // max distance for the lasso loop to be closed
-                    .closePathSelect(true) // can items be selected by closing the path?
-                    .hoverSelect(true) // can items by selected by hovering over them?
-                    .area(lasso_area) // area where the lasso can be started
-                    .on("start",lasso_start) // lasso start function
-                    .on("draw",lasso_draw) // lasso draw function
-                    .on("end",lasso_end); // lasso end function
-
-        // Init the lasso on the svg:g that contains the dots
-                svg.call(lasso);
-                lasso.items(d3.selectAll("circle"))        ;
-
-
-
-
-*/
 
     });
     // Mother Data Loop ends --> For loop for data fetch

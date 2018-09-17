@@ -182,18 +182,67 @@ function second_scatterplot(d) {
             lasso.items()
                 .style("fill", function(d) { return backcolor(4); });
 
-            lasso.items().filter(function(d) {return d.selected===true})
+           var las= lasso.items().filter(function(d) {return d.selected===true})
                 .classed({"not_possible":false,"possible":false})
-                .attr("r",10);
+                .attr("r",10)
+
+
+
+
+
+
+            ;
+
 
 
             lasso.items().filter(function(d) {return d.selected===false})
                 .classed({"not_possible":true,"possible":false})
                 .attr("r",5)
                 .style("fill",backcolor(0))
+                .style("opacity",0);
+
+            drawgrid();
 
         };
+        var new_lasso = function() {
+            lasso.items().filter(function(d) {return d.selected===false})
+                .classed({"not_possible":true,"possible":false})
+                .attr("r",5)
+                .style("fill",backcolor(0))
+                .style("opacity",1)
 
+        }
+        var drawgrid =function(){
+            /*  Added background grids to the Line graph.
+     * variables passed:w,h to tickSize;x,y to scale */
+console.log("hey");
+            var yAxisGrid = d3.svg.axis().scale(yScale)
+                .ticks(20)
+                .tickSize(w, 0)
+
+                .orient("right");
+            console.log("hey");
+            var xAxisGrid = d3.svg.axis().scale(xScale)
+                .ticks(10)
+                .tickSize(-h, 0)
+
+                .orient("top");
+            console.log("hey");
+            // Linked grids to the main svg
+
+            svg.append("g")
+                .classed('y', true)
+                .classed('axis', true)
+                .call(yAxisGrid);
+            console.log("hey");
+            svg.append("g")
+                .classed('x', true)
+                .classed('axis', true)
+                .call(xAxisGrid);
+
+            console.log("hey");
+
+        }
 
         var lasso_area = svg.append("rect")
             .attr("width",w)
@@ -202,13 +251,14 @@ function second_scatterplot(d) {
 
 
         var lasso = d3.lasso()
-            .closePathDistance(75)
+            .closePathDistance(100)
             .closePathSelect(true)
             .hoverSelect(true)
             .area(lasso_area)
             .on("start",lasso_start)
             .on("draw",lasso_draw)
-            .on("end",lasso_end);
+            .on("end",lasso_end)
+
 
 
         svg.call(lasso);
