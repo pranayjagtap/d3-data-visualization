@@ -157,31 +157,7 @@
         <div class="col-lg-1"></div>
     </div>
     <hr>
-    <div class="row"  style="background-color:#E8E8E8;border-radius:15px;">
-        <div class="col-lg-1"></div>
-        <div class="col-lg-5" >
 
-            <h4 align="center">SCATTER PLOT WRITE UP</h4>
-
-
-            <br><br><br>
-            <p  >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-
-        </div>
-        <div class="col-lg-5" >
-            <h4>LINE GRAPH WRITE UP</h4>
-            <br><br><br>
-            <p  >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-
-
-
-        </div>
-            <div class="col-lg-1"></div>
-
-    </div>
-   <hr>
     <div  class="row" style="background-color:#E8E8E8;border-radius: 15px;">
         <div class="col-lg-5" >
             <h4 align="center">BONUS VISUALIZATIONS</h4>
@@ -195,7 +171,35 @@
             <svg id="vis_canvas4" height="500" width="1000" ></svg>
         </div>
     </div>
+<hr>
+    <div class="row"  style="background-color:#E8E8E8;border-radius:15px;">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10" >
 
+            <h4 align="center">WRITE UP</h4>
+            <ul>
+                <li> The first visualization is a scatter plot which is useful to see relation between winner points scored by two players.</li>
+                <li> Each points effectively represent a match and thus can be viewed as an abstract overview.</li>
+                <li> On hovering over the points, user can see the names of players and the points each scored in that match. This plot is interactive in nature.</li>
+                <li> When the user <b>clicks on certain point</b>, a new line graph is generated which gives statistics about the two players who played that match.</li>
+                <li> This new visualiztion encodes the path of points scored by each player over the years. Two line graphs are used for each player: one to show total points scored over the years in winning matches and the other shows the total points scored by the player in his losing matches.</li>
+                <li> User can <b>hover over the points</b> in newly generated line graph to see values for particular year.<li>
+                <li> <b>Nested data structure</b> was created in order to get the sum of points scored by a player in a year with Player as key1 and year as its internal key2 and sum of total points that year being the vaulue to key2. </li>
+                <li> As a part of interaction requirement, <b>two filters are added in the form of drop down menus</b> which allows user to filter data with <b>years and round of play</b>.
+                    <li>For example, if you wish to see a scatter plot of all the semi final matches, you can select semi finals in second drop down while leaving first drop down as 'All matches'.</li>
+                    <li>Similarly, if you want to view all third round matches for the year 2005, select 2005 in years drop down and third round in rounds drop down.</li></li>
+                <li> As a part of bonus charts, a bar chart is plotted that gives an overview by showing sum of errors caused by losing players every year. Hovering over the bar will show details.</li>
+                <li> When user clicks on any of these graphs, a new scatterplot is generated which shows a comparison of errors by player who won against errors made by players who lost for that particular year.</li>
+                <li> This new scatter plot has <b>LASSO feature enabled</b> on it.
+                <li> Select a particular region by dragging your mouse around interested points <b>forming an enclosed area with your mouse</b> and those points pop out while others disable along with a grid appearing for better view and focus on lasso selected points. </li></li>
+            </ul>
+
+
+        </div>
+        <div class="col-lg-1"></div>
+
+    </div>
+    <hr>
 
 </div>
 <script>
