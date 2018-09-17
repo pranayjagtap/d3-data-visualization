@@ -1,7 +1,7 @@
-function barchart(d) {
+function barchart() {
 
-    var d = d;
-    console.log(d);
+
+
     d3                                                                    //To clear previous rendering added on 09-Sep-2018
         .select("#vis_canvas3")
         .selectAll("*")
@@ -35,10 +35,10 @@ var data3=0;
             "translate(" + margin.left + "," + margin.top + ")");
 
     d3.csv("./data/10yearAUSOpenMatches.csv", function (error, data) {
-
-        data.forEach(function (d) {
-            d.year = +d.year;
-            d.error2 = +d.error2;
+        var d=data;
+        data.forEach(function (data) {
+            data.year = +data.year;
+            data.error2 = +data.error2;
         });
         //Repeated above for player 2
         var data3 = d3.nest(d)
@@ -97,6 +97,10 @@ console.log(data3[1].values)
             })
             .on("mouseout", function(d) {
                 d3.select(this).style("fill", color(d.rate));
+            })
+            .on("click",function(d){
+                second_scatterplot(d);
+
             })
             .attr("class", "bar")
             .style("fill", "steelblue")
