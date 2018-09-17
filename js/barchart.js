@@ -88,15 +88,15 @@ console.log(data3[1].values)
             .data(data3)
             .enter().append("rect")
             .on("mouseover", function(data3) {
-                
+                d3.select(this).attr("opacity", 0.5)
                 d3.select(this)
-                    .attr('stroke-width',3)
+                    .attr('stroke-width',5)
                     .enter()
                     .append('title')
                     .text(function (data3) { return 'Player Name :'+data3.key+'\nerror Errors:'+data3.values;})
             })
             .on("mouseout", function(d) {
-                d3.select(this).style("fill", color(d.rate));
+                d3.select(this).attr("opacity", 1)
             })
             .on("click",function(d){
                 second_scatterplot(d);

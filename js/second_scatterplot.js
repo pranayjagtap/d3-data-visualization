@@ -127,7 +127,7 @@ function second_scatterplot(d) {
             .attr('x',w)
             .attr('dx','.71em')
             .style('text-anchor','end')
-            .text('error Points by Player 1')
+            .text('Error Points by Player 1')
         // Y-axis
         svg.append('g')
             .attr('class', 'axis')
@@ -140,7 +140,7 @@ function second_scatterplot(d) {
             .attr('y',1)
             .attr('dy','.71em')
             .style('text-anchor','end')
-            .text('error Points by Player 2')
+            .text('Error Points by Player 2')
 
 
         /*  Added background grids to the Line graph.
