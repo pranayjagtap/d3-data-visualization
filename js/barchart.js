@@ -88,7 +88,7 @@ console.log(data3[1].values)
             .data(data3)
             .enter().append("rect")
             .on("mouseover", function(data3) {
-                d3.select(this).style("fill", d3.rgb(color(d.rate)).darker(2));
+                
                 d3.select(this)
                     .attr('stroke-width',3)
                     .enter()
