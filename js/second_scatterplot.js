@@ -13,7 +13,7 @@ function second_scatterplot(d) {
 
 
 
-// set the dimensions and margins of the graph
+// code to get data
     d3.csv('./data/10yearAUSOpenMatches.csv', function (data) {
         data.forEach(function(d) {
 
